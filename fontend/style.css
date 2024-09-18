@@ -1,0 +1,126 @@
+    /*--------------General styles for all text elements (font/color)*/
+body {
+    font-family:  'Roboto', sans-serif;
+    color: #cdd6f4;
+
+}
+    /*--------------Style the navigation bar -- Controls the layout and appearance of the navigation bar */
+nav {
+    display: flex;
+    justify-content: right;  
+    align-items: center;      
+    background-color: #1e1e2e; 
+    padding: 20px;             
+    position: fixed;
+    width: 100%;             
+    top: 0;
+    z-index: 100;
+    color: #cdd6f4;         
+}
+/*Exosky text on the left of the navbar*/
+.logo{
+    margin-right:auto ;
+}
+.logo h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #cdd6f4;
+}
+/*Nav Menu: -- Layout for navigation items and dropdowns.*/
+.nav-menu {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 40px;
+}
+/*Dropdown Menus and Buttons: -- Styles for dropdown menus, buttons, and hover effects.*/
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #1e1e2e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1000;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    min-width: 160px;
+}
+
+.dropdown-toggle {
+    background-color: #44475a;
+    color: #cdd6f4;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    font-family:  'Roboto', sans-serif;
+}
+.dropdown-toggle i {
+    margin-right: 5px; /*space between the icons and text*/
+}
+.dropdown {
+    position: relative;
+}
+.dropdown-toggle:hover {
+    background-color: #6272a4;
+}
+/*Buttons and Links (Navbar): -- Common styles for both buttons and links to ensure consistency.*/
+button, a {
+    background-color: #44475a;
+    color: #cdd6f4;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+    text-align: center;
+    min-width: 120px;
+}
+/* Dropdown menu links */
+.dropdown-menu li {
+    padding: 10;
+}
+
+.dropdown-menu li:last-child {
+    border-bottom: none;
+}
+
+.dropdown-menu a {
+    color: #cdd6f4;
+    padding: 10px;
+    display: block;
+    text-decoration: none;
+    transition: background 0.3s ease;
+}
+
+.dropdown-menu a:hover {
+    background-color: #6272a4;
+}
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+/* Individual nav items spaced apart */
+.nav-item {
+    margin: 0 8px;
+}
+
+button:hover, a:hover {
+    background-color: #6272a4;
+}
+/*--------------Canvas Styling: -- Styles for the canvas where exoplanet/star data is displayed for the user to interact with.*/
+canvas {
+    margin-top: 80px;
+    width: 100vw;
+    height: calc(100vh - 80px);
+    display: block;
+    background-color: black;
+}
