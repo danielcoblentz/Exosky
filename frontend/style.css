@@ -88,7 +88,7 @@ button, a {
     text-align: center;
     min-width: 120px;
 }
-/* Dropdown menu links */
+/* Dropdown menu links---------------- */
 .dropdown-menu li {
     padding: 10;
 }
@@ -111,15 +111,49 @@ button, a {
 .dropdown:hover .dropdown-menu {
     display: block;
 }
+
+.dropdown-menu label {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* general styles for the check box*/
+.dropdown-menu input[type="checkbox"] {
+    margin-right: 10px;
+    width: 16px;
+    height: 16px;
+    background-color: #44475a;
+    border: 1px solid #6272a4;
+    border-radius: 3px;
+    appearance: none; 
+    cursor: pointer;
+    transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+/* background color of the checkbox is checked */
+.dropdown-menu input[type="checkbox"]:checked {
+    background-color: #667cf6;;
+   
+}
+.dropdown-menu label:hover {
+    background-color: #6272a4;
+}
+
+.dropdown-menu label span {
+    font-size: 1rem;
+    color: #cdd6f4;
+}
 /* Individual nav items spaced apart */
 .nav-item {
     margin: 0 8px;
 }
-
 button:hover, a:hover {
     background-color: #6272a4;
 }
-/*--------------Canvas Styling: -- Styles for the canvas where exoplanet/star data is displayed for the user to interact with.*/
+/*--------------Canvas Styling: -- Styles for the canvas where exoplanet/star data is displayed for the user to interact with. testing this soon!*/
 canvas {
     margin-top: 80px;
     width: 100vw;
