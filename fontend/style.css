@@ -1,8 +1,11 @@
     /*--------------General styles for all text elements (font/color)*/
-body {
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
     font-family:  'Roboto', sans-serif;
     color: #cdd6f4;
-
 }
     /*--------------Style the navigation bar -- Controls the layout and appearance of the navigation bar */
 nav {
