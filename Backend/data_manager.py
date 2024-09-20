@@ -19,3 +19,12 @@ def load_data():
 def get_exoplanet_names(df):
     # Return the unique names from the 'pl_name' column (incase of duplicates)
     return df['pl_name'].dropna().unique().tolist()
+
+def get_exoplanet_coordinates(planet_name, df):
+    planet_data = df[df['pl_name'] == planet_name]
+    if not planet_data.empty:
+        ra = planet_data['ra'].values[0]
+        dec = planet_data['dec'].values[0]
+        return ra, dec
+    else:
+        return None, None
