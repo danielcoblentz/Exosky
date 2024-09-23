@@ -173,4 +173,7 @@ canvas {
     position: relative;
     background-color: black;  
 }
-
+.starCanvas{
+    width: 800px;
+    height: 600px;
+}

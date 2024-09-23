@@ -3,7 +3,7 @@ from data_manager import load_data, get_exoplanet_names, get_exoplanet_coordinat
 from flask_cors import CORS
 import numpy as np
 
-# initialize the Flask application
+# initialize the Flask 
 app = Flask(__name__)
 CORS(app)
 
@@ -23,15 +23,11 @@ def exoplanet_names():
 # endpoint to fetch exoplanet coordinates via name
 @app.route('/api/exoplanets/coordinates', methods=['GET'])
 def exoplanet_coordinates():
-    try:
-        planet_name = request.args.get('planet_name')  # get the planet name from the request query
-        ra, dec = get_exoplanet_coordinates(planet_name, df)  # get the RA/Dec coordinates
-        if ra and dec:
-            return jsonify({'ra': ra, 'dec': dec})  # return the coordinates as JSON 
-        else:
-            return jsonify({'error': 'exoplanet not found in hte dataset!'}), 404  
-    except Exception as e:
-        return jsonify({"error": "failed to fetch exoplanet coordinates", "message": str(e)}), 500
+    planet_name = request.args.get('planet_name')
+    print(f"Received request for coordinates of: {planet_name}")  # Log the received planet name
+    ra, dec = get_exoplanet_coordinates(planet_name, df)
+    if ra is not None and dec is not None:
+        return jsonify({'ra': ra, 'dec': dec})
 
 # endpoint to fetch nearby stars using Gaia DR3 around an exoplanet's coordinates
 @app.route('/api/exoplanets/stars', methods=['GET'])
@@ -55,4 +51,4 @@ def exoplanet_stars():
     except Exception as e:
        
         print(f"Error fetching nearby stars: {e}")
-        return jsonify({"error": "cannot fetch nearby stars", "message": str(e)}), 500
+        return jsonify({"error": "cannot fetch nearby stars", "message": str(e)}), 500 # trying to figureout why its not working properly

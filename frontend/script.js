@@ -43,4 +43,13 @@ document.addEventListener('DOMContentLoaded', function() {
                       })
                       .catch(error => console.error('Error loading exoplanet names:', error));
               });
-              
+              fetch(`/api/exoplanets/coordinates?planet_name=${selectedPlanet}`)
+    .then(response => {
+        console.log("Response status:", response.status); // Log the response status
+        return response.json();
+    })
+    .then(coords => {
+        console.log("Coordinates Response:", coords);
+        // ... existing code
+    })
+    .catch(error => console.error('Error fetching coordinates:', error));

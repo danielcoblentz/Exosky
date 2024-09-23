@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exosky</title>
-    <!-- links to CSS, fonts, icons etc-->
+    <!-- Links to CSS, fonts, icons, etc. -->
     <link rel="stylesheet" href="/frontend/style.css">
     <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="/frontend/script.js" defer></script> <!-- Load script after HTML is loaded -->
 </head>
 <body>
     <!-- Navigation Bar -->
@@ -16,7 +17,6 @@
         <div class="logo">
             <h1>Exosky</h1>
         </div>
-
         <div class="nav-menu">
             <!-- Dropdown for selecting Exoplanet -->
             <div class="nav-item dropdown">
@@ -25,7 +25,6 @@
                 </button>
                 <ul id="exoplanet-dropdown" class="dropdown-menu">
                     <!-- Select check box for each exoplanet -->
-                   
                 </ul>
             </div>
 
@@ -59,10 +58,9 @@
         </div>
     </nav>
 
-    <!--adding the canvas to display the stars -->
-
+    <!-- Canvas to display the stars -->
     <div id="canvas-container">
-        <script src="/frontend/script.js"></script>
+        <canvas id="starCanvas" ></canvas> <!--canvas dimensions -->
     </div>
 </body>
 </html>
