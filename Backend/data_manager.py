@@ -32,28 +32,43 @@ def get_exoplanet_coordinates(planet_name, df):
         return None, None
 
 # query nearby stars from the Gaia DR3 catalog based on the exoplanet's coordinates
-def get_nearby_stars(ra, dec, radius=0.1):
+import numpy as np
+
+def get_nearby_stars(ra, dec, radius=1.0):
     query = f"""
-    SELECT TOP 1000 *
+    SELECT TOP 1000 ra, dec, phot_g_mean_mag as brightness, bp_rp as color_index, parallax
     FROM gaiadr3.gaia_source
     WHERE CONTAINS(POINT('ICRS', ra, dec), CIRCLE('ICRS', {ra}, {dec}, {radius}))=1
+    AND phot_g_mean_mag <= 15  -- Limiting to reasonably bright stars for visibility
     """
     print(f"Querying nearby stars for RA: {ra}, Dec: {dec}, within radius {radius} degrees.")
     job = Gaia.launch_job_async(query)
     results = job.get_results()
 
-    if len(results) == 0:
-        print(f"no stars found near RA: {ra}, Dec: {dec}.")
-        return []  # return an empty list if no stars are found
+    if results is None or len(results) == 0:
+        print(f"No stars found near RA: {ra}, Dec: {dec}.")
+        return []  # Return an empty list if no stars are found
     else:
-        print(f"found {len(results)} nearby stars.")
-    
-    # return the RA and Dec of the found stars
-    stars_data = [{'ra': row['ra'], 'dec': row['dec']} for row in results]
+        print(f"Found {len(results)} nearby stars.")
+
+    #  handle masked or missing values for color_index and parallax
+    stars_data = [
+        {
+            'ra': float(star['ra']),
+            'dec': float(star['dec']),
+            'brightness': float(star['brightness']),
+            'color_index': float(star['color_index']) if not np.ma.is_masked(star['color_index']) else None,  # handle masked color_index
+            'parallax': float(star['parallax']) if not np.ma.is_masked(star['parallax']) else None  # handle masked parallax
+        }
+        for star in results
+    ]
     return stars_data
 
-'''# Test function
-if __name__ == "__main__":
+
+
+
+# Test function
+'''if __name__ == "__main__":
     df = load_data()
 
     # Test exoplanet name retrieval
