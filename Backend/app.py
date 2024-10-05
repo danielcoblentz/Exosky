@@ -12,7 +12,8 @@ df = load_data()
 
 @app.route('/')
 def home():
-    return "Welcome to the API!"
+    return "Welcome to the API!" # just testing if this endpoint is working
+
 
 
 # endpoint to fetch exoplanet names
@@ -45,7 +46,7 @@ def exoplanet_stars():
         if ra and dec:
             stars = get_nearby_stars(ra, dec)  # query nearby stars from Gaia DR3
             
-            # Converting NumPy float32 types to Python float and pandas to_dict for JSON serialization
+# was having issues with integer types converting it to json
             stars_cleaned = []
             for star in stars:
                 stars_cleaned.append({
@@ -56,7 +57,7 @@ def exoplanet_stars():
                     'parallax': float(star['parallax']) if star['parallax'] is not None else None
                 })
             
-            return jsonify(stars_cleaned)  # directly return cleaned stars as JSON
+            return jsonify(stars_cleaned)  
         else:
             return jsonify({'error': 'exoplanet not found'}), 404
     except Exception as e:

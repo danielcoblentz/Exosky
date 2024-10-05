@@ -3,7 +3,7 @@ from pathlib import Path
 from astroquery.gaia import Gaia
 import numpy as np
 
-def load_data():
+def load_data(): # stripping whitespace from the CSV file to worki with data
     data_file_path = Path('C:/Users/dan/Exosky-1/Backend/data/exoplanet_data.csv')
     df = pd.read_csv(data_file_path, skiprows=96, low_memory=False)
     df.columns = df.columns.str.strip()
@@ -12,11 +12,13 @@ def load_data():
     print(f"Columns after stripping whitespace: {df.columns.tolist()}")
     return df
 
+
+# query the unique names for the dropdown menu for users to select
 def get_exoplanet_names(df):
     exoplanet_names = df['pl_name'].dropna().unique().tolist()
     print(f"Found {len(exoplanet_names)} exoplanets.")
     return exoplanet_names
-
+# returns coordinates
 def get_exoplanet_coordinates(planet_name, df):
     planet_name = planet_name.strip()
     print(f"Searching for exoplanet: {planet_name}")
@@ -67,7 +69,7 @@ def get_nearby_stars(ra, dec, radius=1.0):
 
 
 
-# Test function
+# Test function to ensure th eprogram is working as indented
 '''if __name__ == "__main__":
     df = load_data()
 

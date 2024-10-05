@@ -8,26 +8,11 @@ document.addEventListener('DOMContentLoaded', function () {
     exportButton.addEventListener('click', downloadStarMap);
 
 // Function to download the user view as a screenshot
-    function downloadStarMap() {
-        if (!renderer) {
-            console.error('Renderer not initialized.');
-            return;
-        }
+function downloadStarMap() {}
 
-    // get the data URL of the renderers canvas
-        const imgData = renderer.domElement.toDataURL('image/png');
-
-        // Create a temporary link element
-        const link = document.createElement('a');
-        link.href = imgData;
-        link.download = `star_map_${selectedPlanet || 'exoplanet'}.png`; // name of image
-
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-
-    // fetch exoplanet names and populate the dropdown menu on the index page
+//////////////////////////////////////////////////////////////////////////////////////////////
+//main program functionality seperate from the additional dropdown features
+        // fetch exoplanet names and populate the dropdown menu on the index page
     fetch('http://127.0.0.1:5000/api/exoplanets/names')
         .then(response => response.json())
         .then(data => {
@@ -113,7 +98,6 @@ document.addEventListener('DOMContentLoaded', function () {
         while (scene.children.length > 0) {
             scene.remove(scene.children[0]);
         }
-
      // set up the camera at the exoplanet's position
         camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight,0.1,5000 );
         camera.position.set(0, 0, 0); // position the camera at the origin of the exoplanet
@@ -126,13 +110,12 @@ document.addEventListener('DOMContentLoaded', function () {
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setClearColor(0x000000);
         }
-
-    // Add OrbitControls for users to look around in the render
+        
+        
+    // Add OrbitControls for users in the render update ht emindistance to see more stars (starting position will be in hte cneter of th eexoplanet)
         const controls = new THREE.OrbitControls(camera, renderer.domElement);
-        controls.enablePan = false; // Disable panning
-        controls.enableZoom = false; // Disable zooming
-        controls.minDistance = 0;
-        controls.maxDistance = 0;
+        controls.minDistance = 1200;
+        controls.maxDistance = 2000;
         controls.update();
 
     // fixed radius for the celestial sphere
@@ -156,11 +139,11 @@ document.addEventListener('DOMContentLoaded', function () {
             if (deltaRa > 180) deltaRa -= 360;
             if (deltaRa < -180) deltaRa += 360;
 
-                 //convert scaled angular differences to radians
+    //convert scaled angular differences to radians
             const deltaRaRadians = deltaRa * (Math.PI / 180);
             const deltaDecRadians = deltaDec * (Math.PI / 180);
 
-            //convert spherical coordinates to Cartesian coordinates
+            //convert spherical coordinates to cartesian coordinates
             const x =
                 starSphereRadius *
                 Math.cos(deltaDecRadians) *
@@ -187,7 +170,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             colors.push(color.r, color.g, color.b);
         });
-
         // geometry and material, creates shapes in 3D space
         const geometry = new THREE.BufferGeometry();
         geometry.setAttribute(
@@ -209,10 +191,10 @@ document.addEventListener('DOMContentLoaded', function () {
         const points = new THREE.Points(geometry, material);
         scene.add(points);
 
-        // store sprites for later removal
+ // store sprites for later removal
         const starNameSprites = [];
 
-            // Create labels if showNames is true
+     // Create labels if showNames is true
         if (showNames) {
             starData.forEach((starInfo, index) => {
                 const starName = starInfo.data.name || `Star ${index + 1}`;
@@ -228,14 +210,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 sprite.position.copy(starInfo.position);
 
                 // adjust the scale of the sprite
-                sprite.scale.set(100, 50, 1); // Adjust as needed
+                sprite.scale.set(100, 50, 1);
 
                 scene.add(sprite);
                 starNameSprites.push(sprite);
             });
         }
 
-        // function to generate canvas with text with more detailed inofrmation about the specific star on hover
+        // function to generate canvas with text with more detailed inofrmation about the specific star on hover including star name RA, DEC
         function generateSprite(text) {
             const canvas = document.createElement('canvas');
             canvas.width = 256;
@@ -246,10 +228,7 @@ document.addEventListener('DOMContentLoaded', function () {
             context.fillText(text, 10, 64);
             return canvas;
         }
-
-        // event listener for hover interaction
         renderer.domElement.addEventListener('mousemove', onMouseMove, false);
-
         let INTERSECTED;
         function onMouseMove(event) {
             event.preventDefault();
@@ -322,4 +301,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-z
