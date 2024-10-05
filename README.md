@@ -1,14 +1,14 @@
 # ExoSky!
-ExoSky is an interactive web application that allows users to visualize the night sky from the perspective of various exoplanets. By selecting an exoplanet from the provided list, users can explore the surrounding stars, view detailed information about them, and even download a snapshot of their current view. ExoSky aims to provide an immersive and educational experience for astronomy enthusiasts and anyone interested in exploring the universe beyond our solar system.
+ExoSky is an interactive web application that allows users to visualize the night sky from the perspective of various exoplanets. By selecting an exoplanet from the provided list, users can explore the surrounding stars and view detailed information about them. ExoSky aims to provide an immersive and educational experience for astronomy enthusiasts and anyone interested in exploring the universe beyond our solar system.
 
 Technologies Used:
 - HTML5 & CSS3: For structuring and styling the web pages.
 - JavaScript (ES6+): Provides interactive functionality and handles API calls.
-- Three.js: A powerful 3D library used for rendering the star map and handling 3D interactions.
+- Three.js: A 3D library used for rendering the star map and handling 3D interactions.
 - Flask: A Python web framework used to create a RESTful API for serving exoplanet and star data.
 - Remix Icon: An icon library used for the nav bar.
 - Google Fonts: Provides aesthetically pleasing fonts for the application's text.
-- OrbitControls.js: An extension for Three.js that allows intuitive mouse controls for rotating and zooming the 3D scene.
+- OrbitControls.js: An extension for Three.js that allows users to control the min and max distance in the 3D scene.
   
 ## Installation:
 <details>
